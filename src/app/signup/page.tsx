@@ -4,7 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 
 
-const page = () => {
+const Page = () => {
   const [inputs, setInputs] = useState({
     name: '',
     email: '',
@@ -41,4 +41,4 @@ window.location.href = '/login'
   )
 }
 
-export default page
+export default Page
