@@ -1,14 +1,10 @@
 'use client'
 import { useState } from "react";
-import Signup from "../_ui/Signup"
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
-import { redirect } from "next/navigation";
-import { NextResponse } from "next/server";
-import { useRouter } from "next/navigation";
+
 
 const page = () => {
-  const router = useRouter();
   const [inputs, setInputs] = useState({
     name: '',
     email: '',
@@ -29,7 +25,7 @@ const data = await axios.post('/api/signup', {name, email, password})
 
 console.log(data)
 toast.success('User successfully Created');
-return router.push('/login'); 
+window.location.href = '/login'
 }
 
   return (
