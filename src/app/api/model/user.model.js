@@ -1,0 +1,27 @@
+import mongoose from "mongoose";
+
+const userSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+        },
+    password: {
+            type: String,
+            required: true
+    },
+    img: {
+            type: String,
+    },
+    blog: {
+            type: Array,
+    }
+}, {timestamps: true});
+
+const User = mongoose.models.BlogUser || mongoose.model('BlogUser', userSchema);
+
+export default User;
