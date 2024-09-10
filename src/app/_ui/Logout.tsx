@@ -6,7 +6,7 @@ import { toast, ToastContainer } from 'react-toastify';
 const Logout = () => {      
   async function handleLogout(){
     try {
-      const logout = await axios.post('http://localhost:3000/api/logout');
+      const logout = await axios.post('/api/logout');
       toast.success('logged Out Successfully')
       window.location.href = '/login';
     } catch (error) {
