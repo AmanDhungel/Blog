@@ -17,7 +17,7 @@ export function middleware(req: NextRequest) {
     // If token exists, continue to the requested page
   } else {
     // If token does not exist, redirect to the login page
-    if( req.nextUrl.pathname === '/user/addBlog'){
+    if(req.nextUrl.pathname.startsWith('/user') ){
     return NextResponse.redirect(new URL(LOGIN_URL, req.url));
     }
   }
