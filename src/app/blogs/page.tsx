@@ -1,8 +1,7 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Blogs from '../_ui/Blogs.tsx';
+import Blogs from '../_ui/Blogs';
 
 export type Blog = {
 _id?: string,

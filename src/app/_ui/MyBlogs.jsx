@@ -2,13 +2,15 @@
 import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 const MyBlogs = ({ data }) => {
+ const router = useRouter();
        async function handleDelete(id){
              try {
-                const deletedata = await axios.delete(`/api/user/${id}`) 
-                window.location.reload();
+                const deletedata = await axios.delete(`/api/user/${id}`);
+                router.refresh();
              } catch (error) {
                 console.log(error)
              }
