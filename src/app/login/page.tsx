@@ -14,7 +14,7 @@ const LoginPage = () => {
     if(email == '' || password == ''){
      return toast.error('Please fill in all fields');
     }
-     const response = await axios.post('http://localhost:3000/api/login', {email: email, password: password});   
+     const response = await axios.post('https://blog-7stbd7isa-amandhungels-projects.vercel.app/api/login', {email: email, password: password});   
      console.log("response", response);
      toast.success("You are logged in")
      window.location.href = '/user/addBlog'; 

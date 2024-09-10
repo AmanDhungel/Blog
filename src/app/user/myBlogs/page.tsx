@@ -10,7 +10,7 @@ const Page = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/user');
+        const response = await axios.get('https://blog-7stbd7isa-amandhungels-projects.vercel.app/api/user');
         setBlogs(response.data);
         setLoading(false);
       } catch (error) {

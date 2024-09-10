@@ -39,14 +39,14 @@ const Page = ({ params }: PageProps) => {
     const fetchBlog = async () => {
       try {
         setLoading(true);
-        const response = await axios.get<{ data: Blog }>(`http://localhost:3000/api/blogs/${id}`);
+        const response = await axios.get<{ data: Blog }>(`https://blog-7stbd7isa-amandhungels-projects.vercel.app/api/blogs/${id}`);
         const fetchedBlog = response.data.data;
         setBlog(fetchedBlog);
         console.log("fetched blogs", fetchedBlog)
         
         // After fetching the blog, fetch the user data using the userId
         if (fetchedBlog.userId) {
-          const userResponse = await axios.get<{ data: User }>(`http://localhost:3000/api/login/${fetchedBlog.userId}`);
+          const userResponse = await axios.get<{ data: User }>(`https://blog-7stbd7isa-amandhungels-projects.vercel.app/api/login/${fetchedBlog.userId}`);
           const fetchedUser = {...userResponse.data.data, password: undefined};
           console.log('fetchedUser', fetchedUser);
           setUser(fetchedUser);
