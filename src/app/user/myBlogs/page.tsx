@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Blogs from '../../_ui/Blogs.jsx';
-
+import MyBlogs from '../../_ui/MyBlogs.jsx';
 const Page = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,7 +11,6 @@ const Page = () => {
     const fetchBlogs = async () => {
       try {
         const response = await axios.get('http://localhost:3000/api/user');
-        console.log("response", response);
         setBlogs(response.data);
         setLoading(false);
       } catch (error) {
@@ -24,7 +22,6 @@ const Page = () => {
     fetchBlogs();
   }, []); // Empty dependency array to fetch data on component mount
 
-  console.log('blogs', blogs)
    
   if (loading) {
     return   <div className="flex flex-col items-center justify-center h-screen bg-slate-900">
@@ -35,7 +32,7 @@ const Page = () => {
 
   return (
     <div className='flex flex-wrap justify-center w-11/12 gap-4 ml-20'>
-      <Blogs data={blogs} />
+      <MyBlogs data={blogs} />
     </div>
   );
 };

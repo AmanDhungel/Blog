@@ -1,8 +1,18 @@
 'use client';
+import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect } from 'react';
 
-const Blogs = ({ data }) => {
+const MyBlogs = ({ data }) => {
+       async function handleDelete(id){
+             try {
+                const deletedata = await axios.delete(`http://localhost:3000/api/user/${id}`) 
+                window.location.reload();
+             } catch (error) {
+                console.log(error)
+             }
+        }
   return (
     <div className="flex flex-wrap justify-center gap-4 mt-10">
       {data.map((item) => (
@@ -22,12 +32,21 @@ const Blogs = ({ data }) => {
               {item.description}
             </p>
             {/* Link to read more */}
+            <div className='flex justify-between'>
+
             <Link
   href={`/blogs/${item._id}`}
   className="w-32 px-4 py-2 bg-slate-900 text-white font-semibold rounded-md shadow hover:bg-slate-700 transition duration-300"
 >
   Read More
 </Link>
+            <button
+            onClick={() => handleDelete(item._id)}
+  className="w-32 px-4 py-2 bg-red-900 text-white font-semibold rounded-md shadow hover:bg-red-700 transition duration-300"
+>
+Delete
+</button>
+    </div>
 
           </div>
         </div>
@@ -36,4 +55,4 @@ const Blogs = ({ data }) => {
   );
 };
 
-export default Blogs;
+export default MyBlogs;

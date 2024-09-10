@@ -4,6 +4,7 @@ import axios from 'axios';
 import { jwtVerify } from 'jose';
 import { getCookies } from 'cookies-next';
 import { useCookies } from 'next-client-cookies';
+import { revalidatePath } from 'next/cache';
 
 const BlogForm = () => {
   const [title, setTitle] = useState<string>('');
@@ -36,6 +37,7 @@ const BlogForm = () => {
       setTitle('');
       setDescription('');
       setImages([]);
+      window.location.href ='/blogs'
     } catch (err) {
       setError('Failed to add blog. Please try again.');
       console.error(err);
