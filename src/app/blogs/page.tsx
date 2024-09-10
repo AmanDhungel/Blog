@@ -4,14 +4,24 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Blogs from '../_ui/Blogs.jsx';
 
+type Blog = {
+_id?: string,
+title?: string,
+description?: string,
+images?: string[],
+updateAt?: string,
+__v? : number
+}
+
 const Page = () => {
-  const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const response = await axios.get('/api/blogs');
+        console.log('response', response.data);
         setBlogs(response.data);
         setLoading(false);
       } catch (error) {
