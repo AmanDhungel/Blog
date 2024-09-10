@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import MyBlogs from '../../_ui/MyBlogs.jsx';
+import { ExclamationCircleIcon } from '@heroicons/react/16/solid';
+import Link from 'next/link.js';
 const Page = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,9 +33,17 @@ const Page = () => {
   }
 
   return (
+      blogs && blogs.length > 0 ?
     <div className='flex flex-wrap justify-center w-11/12 gap-4 ml-20'>
       <MyBlogs data={blogs} />
-    </div>
+    </div> : <div className="flex flex-col items-center justify-center h-screen text-center bg-gray-100">
+          <ExclamationCircleIcon className="w-16 h-16 text-red-500 mb-4" /> {/* Icon */}
+          <h1 className="text-3xl font-bold text-gray-700 mb-2">No Blog Found</h1>
+          <p className="text-lg text-gray-500">Sorry, You have not poseted any blogs.</p>
+          <Link href='/user/addBlog' className="mt-6 px-6 py-3 bg-blue-500 text-white font-semibold rounded-md shadow hover:bg-blue-600 transition">
+            Add Blog
+          </Link>
+        </div>
   );
 };
 
