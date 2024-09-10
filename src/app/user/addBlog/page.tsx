@@ -23,7 +23,7 @@ const BlogForm = () => {
     try {
      
 
-      const response = await axios.post('https://blog-7stbd7isa-amandhungels-projects.vercel.app/api/blogs', {
+      const response = await axios.post('/api/blogs', {
         title,
         description,
         images,

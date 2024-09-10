@@ -10,13 +10,13 @@ export function middleware(req: NextRequest) {
 
   if (token) {
     console.log(req.url)
-    if(req.url === 'https://blog-7stbd7isa-amandhungels-projects.vercel.app/login' || req.url === 'https://blog-7stbd7isa-amandhungels-projects.vercel.app/signup'){
+    if(req.url === '/login' || req.url === '/signup'){
       return NextResponse.redirect(new URL(BLOG_URL, req.url))
     }
     // If token exists, continue to the requested page
   } else {
     // If token does not exist, redirect to the login page
-    if(req.url === 'https://blog-7stbd7isa-amandhungels-projects.vercel.app/user/addBlog'){
+    if(req.url === '/user/addBlog'){
     return NextResponse.redirect(new URL(LOGIN_URL, req.url));
     }
   }
