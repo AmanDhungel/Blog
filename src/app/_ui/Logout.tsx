@@ -1,15 +1,17 @@
 'use client'
 import axios from 'axios'
+import { useRouter } from 'next/navigation';
 import React from 'react'
 import { toast, ToastContainer } from 'react-toastify';
 
 const Logout = () => {      
+  const router = useRouter();
   async function handleLogout(){
     try {
       const logout = await axios.post('/api/logout');
-      toast.success('logged Out Successfully')
-      window.location.href = '/login';
-    } catch (error) {
+      router.push('/login');
+      router.refresh();
+     } catch (error) {
       console.log(error)
     }
   }

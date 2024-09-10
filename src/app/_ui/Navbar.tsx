@@ -2,6 +2,7 @@ import Link from 'next/link'
 import '../globals.css'
 import { cookies } from 'next/headers'
 import Logout from './Logout'
+import { ToastContainer } from 'react-toastify'
 
 const Navbar = () => {
   const value = cookies().get('token')!;

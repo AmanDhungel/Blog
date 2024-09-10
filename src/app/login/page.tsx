@@ -16,7 +16,7 @@ const LoginPage = () => {
     }
      const response = await axios.post('/api/login', {email: email, password: password});   
      toast.success("You are logged in")
-     window.location.href = '/user/addBlog'; 
+     window.location.href = '/user/MyBlogs'; 
     } catch (error : any) {
       toast.error(error.response.data.message)
     }
@@ -57,7 +57,7 @@ const enterOnPassword = (e : any) => {
       >
         Login
       </button>
-      <ToastContainer/>
+      
     </div>
   );
 }
