@@ -65,3 +65,5 @@ const enterOnPassword = (e : any) => {
 
 
 export default LoginPage;
+
+

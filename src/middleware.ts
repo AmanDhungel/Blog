@@ -22,6 +22,8 @@ export function middleware(req: NextRequest) {
   }
 }
 
+
+
 // Define the paths where the middleware should be applied
 export const config = {
     matcher: ['/user/:path*', '/login/:path*', '/signup/:path*'], // Apply middleware to all pages under /user/

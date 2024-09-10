@@ -42,3 +42,4 @@ window.location.href = '/login'
 }
 
 export default Page
+
