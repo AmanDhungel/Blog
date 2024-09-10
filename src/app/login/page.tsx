@@ -15,12 +15,10 @@ const LoginPage = () => {
      return toast.error('Please fill in all fields');
     }
      const response = await axios.post('/api/login', {email: email, password: password});   
-     console.log("response", response);
      toast.success("You are logged in")
      window.location.href = '/user/addBlog'; 
     } catch (error : any) {
       toast.error(error.response.data.message)
-      console.error('Login error:', error)
     }
   };
 
@@ -59,6 +57,7 @@ const enterOnPassword = (e : any) => {
       >
         Login
       </button>
+      <ToastContainer/>
     </div>
   );
 }

@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Blogs from '../_ui/Blogs.jsx';
+import Blogs from '../_ui/Blogs.tsx';
 
-type Blog = {
+export type Blog = {
 _id?: string,
 title?: string,
 description?: string,

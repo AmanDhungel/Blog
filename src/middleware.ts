@@ -7,16 +7,17 @@ const BLOG_URL = '/user/addBlog';
 // Middleware function to check for the authentication token
 export function middleware(req: NextRequest) {
   const token = req.cookies.get('token'); // Retrieve the token from cookies
-
+  console.log('req url', req.nextUrl.pathname)
+   
   if (token) {
     console.log(req.url)
-    if(req.url === '/login' || req.url === '/signup'){
+    if(req.nextUrl.pathname === '/login' ||  req.nextUrl.pathname === '/signup'){
       return NextResponse.redirect(new URL(BLOG_URL, req.url))
     }
     // If token exists, continue to the requested page
   } else {
     // If token does not exist, redirect to the login page
-    if(req.url === '/user/addBlog'){
+    if( req.nextUrl.pathname === '/user/addBlog'){
     return NextResponse.redirect(new URL(LOGIN_URL, req.url));
     }
   }
