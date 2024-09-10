@@ -17,6 +17,7 @@ interface User {
   _id: string;
   name: string;
   email: string;
+  password? : string;
 }
 
 interface PageProps {
@@ -27,7 +28,7 @@ interface PageProps {
 
 const Page = ({ params }: PageProps) => {
   const [blog, setBlog] = useState<Blog | null>(null);
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -46,7 +47,9 @@ const Page = ({ params }: PageProps) => {
         // After fetching the blog, fetch the user data using the userId
         if (fetchedBlog.userId) {
           const userResponse = await axios.get<{ data: User }>(`http://localhost:3000/api/login/${fetchedBlog.userId}`);
-          setUser(userResponse.data);
+          const fetchedUser = {...userResponse.data.data, password: undefined};
+          console.log('fetchedUser', fetchedUser);
+          setUser(fetchedUser);
         }
         setLoading(false);
       } catch (error) {

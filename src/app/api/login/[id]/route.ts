@@ -6,8 +6,8 @@ export async function GET(req: NextRequest, {params} : {params : {id: string}}){
     connectDb();
     try {
         const {id} = params;
-        const users = await User.findById(id)
-        return NextResponse.json(users);
+        const data = await User.findById(id)
+        return NextResponse.json({data});
         
     } catch (error) {
         return NextResponse.json({message: "Cannot Find the User with this id"}, {status: 404})

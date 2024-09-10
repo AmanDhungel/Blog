@@ -23,7 +23,7 @@ const MyBlogs = ({ data }) => {
             alt={item.title}
             width={600} // Adjust the width according to your layout needs
             height={400} // Adjust the height according to your layout needs
-               className="rounded-md object-cover h-[15rem] w-[30rem]"
+            className="rounded-md object-cover h-[15rem] w-[30rem]"
           />
           {/* Blog content */}
           <div className="bg-slate-200 p-4 flex flex-col gap-2 text-slate-900">

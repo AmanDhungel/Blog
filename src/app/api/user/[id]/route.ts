@@ -3,8 +3,9 @@ import Blog from "../../model/blog.model";
 import { jwtVerify } from "jose";
 import { revalidatePath } from "next/cache";
 
-export async function DELETE(req: NextRequest,  {params} : {id : string}){
+export async function DELETE(req: NextRequest,  {params} : any ){
     const {id} = params;
+    console.log(id);
     try {
       const token = req.cookies.get('token')!;
       const decoded = await jwtVerify(token.value, new TextEncoder().encode(process.env.JWT_SECRET));

@@ -1,10 +1,9 @@
 import Link from 'next/link'
 import '../globals.css'
-import { NextRequest } from 'next/server'
 import { cookies } from 'next/headers'
 import Logout from './Logout'
 
-const Navbar = (req: NextRequest) => {
+const Navbar = () => {
   const value = cookies().get('token')!;
   
 

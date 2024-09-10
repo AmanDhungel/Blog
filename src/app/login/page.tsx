@@ -18,7 +18,7 @@ const LoginPage = () => {
      console.log("response", response);
      toast.success("You are logged in")
      window.location.href = '/user/addBlog'; 
-    } catch (error) {
+    } catch (error : any) {
       toast.error(error.response.data.message)
       console.error('Login error:', error)
     }
