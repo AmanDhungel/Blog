@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 const MyBlogs = ({ data }) => {
        async function handleDelete(id){
              try {
-                const deletedata = await axios.delete(`http://localhost:3000/api/user/${id}`) 
+                const deletedata = await axios.delete(`/api/user/${id}`) 
                 window.location.reload();
              } catch (error) {
                 console.log(error)
