@@ -4,5 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(){
 cookies().delete('token');
-revalidatePath('/login');
+
+return NextResponse.json({message: 'logout successfully'});
 }
+
