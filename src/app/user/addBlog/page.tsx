@@ -1,6 +1,13 @@
 'use client';
 import { useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
+
+
+interface BlogData{
+  title: string;
+  description: string;
+  images: string[];
+}
 
 const BlogForm = () => {
   const [title, setTitle] = useState<string>('');
@@ -21,9 +28,8 @@ const BlogForm = () => {
     setSuccess(null);
 
     try {
-     
-
-      const response = await axios.post('/api/blogs', {
+    
+      const response : AxiosResponse<BlogData> = await axios.post<BlogData>('/api/blogs', {
         title,
         description,
         images,
@@ -34,7 +40,7 @@ const BlogForm = () => {
       setDescription('');
       setImages([]);
       window.location.href ='/blogs'
-    } catch (err) {
+    } catch (err : unknown) {
       setError('Failed to add blog. Please try again.');
       console.error(err);
     } finally {

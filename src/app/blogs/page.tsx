@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import Blogs from '../_ui/Blogs';
 
 export type Blog = {
@@ -17,9 +17,17 @@ const Page = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    /**
+     * Fetches the list of blogs from the server and updates the state
+     *
+     * On success, sets the `blogs` state to the response data and sets
+     * `loading` to false.
+     *
+     * On error, logs the error to the console and sets `loading` to false.
+     */
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get('/api/blogs');
+        const response : AxiosResponse<Blog[]> = await axios.get<Blog[]>('/api/blogs');
         console.log('response', response.data);
         setBlogs(response.data);
         setLoading(false);
@@ -28,11 +36,7 @@ const Page = () => {
         setLoading(false);
       }
     };
-
     fetchBlogs();
-
-
-
   }, []); // Empty dependency array to fetch data on component mount
    
   if (loading) {

@@ -1,11 +1,19 @@
 'use client'
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
+import { useRouter } from "next/navigation";
 
+type Inputs = {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
 
 const Page = () => {
-  const [inputs, setInputs] = useState({
+const router = useRouter();
+  const [inputs, setInputs] = useState<Inputs>({
     name: '',
     email: '',
     password: '',
@@ -21,11 +29,11 @@ const handleSignup = async() => {
 if(inputs.password !== inputs.confirmPassword){
    return toast.error('confirm Passwords do not match with the Password');
 }
-const data = await axios.post('/api/signup', {name, email, password})
+const data : AxiosResponse<Inputs> = await axios.post<Inputs>('/api/signup', {name, email, password})
 
 console.log(data)
 toast.success('User successfully Created');
-window.location.href = '/login'
+router.push('/login');
 }
 
   return (

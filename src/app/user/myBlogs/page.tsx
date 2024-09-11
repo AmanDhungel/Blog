@@ -5,11 +5,36 @@ import axios from 'axios';
 import MyBlogs from '../../_ui/MyBlogs.jsx';
 import { ExclamationCircleIcon } from '@heroicons/react/16/solid';
 import Link from 'next/link.js';
+/**
+ * Page component for the user's myBlogs page
+ *
+ * Fetches the user's blogs on mount and displays a loading animation
+ * if the data is still being fetched. If the user has no blogs, displays
+ * an empty state message with a link to add a new blog.
+ */
+
+type Blog = {
+  _id: string;
+  title: string;
+  description: string;
+  images: string[];
+  userId: string;
+  __v: number;
+  updateAt: string;
+}
 const Page = () => {
-  const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    /**
+     * Fetches the user's blogs from the server and sets the state
+     *
+     * On success, sets the `blogs` state to the response data and sets
+     * `loading` to false.
+     *
+     * On error, logs the error to the console and sets `loading` to false.
+     */
     const fetchBlogs = async () => {
       try {
         const response = await axios.get('/api/user');

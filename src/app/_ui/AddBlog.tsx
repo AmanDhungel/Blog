@@ -3,23 +3,24 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import Blogs from './Blogs';
+import axios, { AxiosResponse } from 'axios';
+import { Blog } from '../blogs/page';
 
 const AddBlog = () => {
-    const [blogs, setBlogs] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [blogs, setBlogs] = useState<Blog[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
   
     useEffect(() => {
       const fetchBlogs = async () => {
         try {
-          const response = await axios.get('http://localhost:3000/api/blogs');
+          const response : AxiosResponse<Blog[]> = await axios.get<Blog[]>('http://localhost:3000/api/blogs');
           setBlogs(response.data);
           setLoading(false);
-        } catch (error) {
+        } catch (error: any) {
           console.error('Error fetching blogs:', error);
           setLoading(false);
         }
       };
-  
       fetchBlogs();
     }, []);
     

@@ -2,7 +2,6 @@
 import axios from 'axios'
 import { useRouter } from 'next/navigation';
 import React from 'react'
-import { toast, ToastContainer } from 'react-toastify';
 
 const Logout = () => {      
   const router = useRouter();
@@ -15,6 +14,7 @@ const Logout = () => {
       console.log(error)
     }
   }
+
   return (
     <>
     <button onClick={handleLogout}>Logout</button>

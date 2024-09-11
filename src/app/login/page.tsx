@@ -1,20 +1,25 @@
 'use client'; 
-import axios from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+interface LoginData{
+  email: string;
+  password: string;
+}
+
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState<string | null>('');
+  const [password, setPassword] = useState<string | null>('');
 
   const handleLogin = async () => {
     try {
     if(email == '' || password == ''){
      return toast.error('Please fill in all fields');
     }
-     const response = await axios.post('/api/login', {email: email, password: password});   
+     const response : AxiosResponse<LoginData> = await axios.post<LoginData>('/api/login', {email: email, password: password});   
      toast.success("You are logged in")
      window.location.href = '/user/myBlogs'; 
     } catch (error : any) {
@@ -22,7 +27,7 @@ const LoginPage = () => {
     }
   };
 
-const enterOnPassword = (e : any) => {
+const enterOnPassword = (e : {key: string}) => {
   if(e.key === 'Enter'){
     handleLogin();
     }
