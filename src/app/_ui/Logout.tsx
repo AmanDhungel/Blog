@@ -1,10 +1,11 @@
 'use client'
 import axios from 'axios'
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React from 'react'
 
 const Logout = () => {      
   const router = useRouter();
+  const pathname = usePathname();
   async function handleLogout(){
     try {
       const logout = await axios.post('/api/logout');
@@ -17,7 +18,7 @@ const Logout = () => {
 
   return (
     <>
-    <button onClick={handleLogout}>Logout</button>
+    <button className={`hover:underline hover:underline-offset-8 hover:scale-[1.03] hover:animate-pulse hover:transition-all hover:delay-300`} onClick={handleLogout}>Logout</button>
     </>
   )
 }

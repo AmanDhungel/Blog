@@ -5,9 +5,13 @@ export const blogSchema = new mongoose.Schema({
         type: String,
         required: [true, 'title is required']
     },
+    titledesc: {
+        type: String,
+        required: [true, 'title Description is required']
+    },
     description: {
         type: String,
-        required: [true, 'title is required']
+        required: [true, 'description is required']
     },
     userId: {
         type: String,

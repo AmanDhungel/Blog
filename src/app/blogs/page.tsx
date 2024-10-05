@@ -5,6 +5,7 @@ import Blogs from '../_ui/Blogs';
 
 export type Blog = {
 _id?: string,
+titledesc? : string,
 title?: string,
 description?: string,
 images?: string[],

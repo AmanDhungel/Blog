@@ -1,9 +1,9 @@
 'use client'; 
+import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 interface LoginData{
   email: string;
@@ -11,28 +11,42 @@ interface LoginData{
 }
 
 const LoginPage = () => {
+  const router = useRouter();
   const [email, setEmail] = useState<string | null>('');
   const [password, setPassword] = useState<string | null>('');
 
   const handleLogin = async () => {
-    try {
     if(email == '' || password == ''){
      return toast.error('Please fill in all fields');
     }
+
+    if(!email?.includes('@')){
+      return toast.error('Please enter a valid email');
+    }
      const response : AxiosResponse<LoginData> = await axios.post<LoginData>('/api/login', {email: email, password: password});   
      toast.success("You are logged in")
-     window.location.href = '/user/myBlogs'; 
-    } catch (error : any) {
-      toast.error(error.response.data.message)
-    }
+     router.push('/user/myBlogs'); 
+     router.refresh();
   };
 
 const enterOnPassword = (e : {key: string}) => {
   if(e.key === 'Enter'){
-    handleLogin();
+    onSubmit ();
     }
 }
 
+const mutation = useMutation({
+  mutationFn: handleLogin
+})
+
+const {isPending, isSuccess, error} =mutation;
+
+const onSubmit = async () => {
+  mutation.mutate();
+}
+
+
+console.log(isPending, isSuccess, error)
 
   return (
     <div className="flex flex-col m-auto items-center h-[90vh] gap-2 justify-center">
@@ -43,7 +57,7 @@ const enterOnPassword = (e : {key: string}) => {
         id="email"
         onChange={(e) => setEmail(e.target.value)}
         name="email"
-        className="p-3 bg-slate-900 rounded"
+        className="p-3 bg-slate-900 rounded text-white"
         onKeyDown={enterOnPassword}
       />
       <input
@@ -58,11 +72,12 @@ const enterOnPassword = (e : {key: string}) => {
       <button
         className="bg-blue-500 hover:bg-blue-700 p-3 text-white font-bold py-2 px-4 rounded"
         type="submit"
-        onClick={handleLogin}
+        onClick={onSubmit}
+        disabled={isPending}
       >
-        Login
+      {isPending? 'logging In' :  'Login'}
       </button>
-      
+      {error ? <p className='text-red-500 mt-5'>{error.response.data.message}</p> : ''}
     </div>
   );
 }

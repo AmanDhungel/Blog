@@ -3,6 +3,16 @@ import Blog from "../../model/blog.model";
 import { jwtVerify } from "jose";
 import { revalidatePath } from "next/cache";
 
+export async function GET(req: NextRequest,  {params} : any ){
+    const {id} = params;
+    try {
+
+      const blog = await Blog.findById(id);
+     return NextResponse.json({blog});
+    } catch (error) {
+     return NextResponse.json({message: "no item with this id", error}, {status : 500});
+    }
+}
 export async function DELETE(req: NextRequest,  {params} : any ){
     const {id} = params;
     console.log(id);
@@ -21,7 +31,7 @@ export async function DELETE(req: NextRequest,  {params} : any ){
 
      const data= await Blog.findByIdAndDelete(id);
      revalidatePath('/user/myBlogs');
-     return NextResponse.json({success: true, message: 'blog deleted successfully'});
+     return NextResponse.json({data});
     } catch (error) {
      return NextResponse.json({message: "no item with this id", error}, {status : 500});
     }

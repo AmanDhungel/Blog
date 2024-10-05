@@ -21,9 +21,9 @@ export async function POST(req : NextRequest){
     console.log(token);
     const decode = await jwtVerify(token.value, new TextEncoder().encode(process.env.JWT_SECRET));
     console.log("payload ID", decode.payload.id);
-    const {title, description, images} = body;
+    const {title, description, images, titledesc} = body;
     try {
-        const blog = await Blog.create({title, description, images, userId : decode.payload.id});
+        const blog = await Blog.create({title, titledesc,  description, images, userId : decode.payload.id});
         return NextResponse.json(blog, {status: 201});
     } catch (error) {
         console.log(error);
